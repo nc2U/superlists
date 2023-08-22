@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
-        self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(50)
+        self.browser = webdriver.Chrome()
+        self.browser.implicitly_wait(15)
 
     def tearDown(self):
         self.browser.quit()
