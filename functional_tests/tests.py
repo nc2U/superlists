@@ -20,8 +20,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        if cls.server_url == cls.live_server_url:
-            super().tearDownClass()
+        for arg in sys.argv:
+            if 'liveserver' not in arg:
+                super().tearDownClass()
 
     def setUp(self):
         self.browser = webdriver.Chrome()
