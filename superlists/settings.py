@@ -32,7 +32,7 @@ SECRET_KEY = ''.join([random.SystemRandom().choice(chars) for i in range(50)])
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['15.164.100.183', 'ec2-15-164-100-183.ap-northeast-2.compute.amazonaws.com']
+CSRF_TRUSTED_ORIGINS = ['http://15.164.100.183', 'http://ec2-15-164-100-183.ap-northeast-2.compute.amazonaws.com']
 
 # Application definition
 
