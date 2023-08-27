@@ -29,8 +29,7 @@
                 <h1 class="mb-4">{% block header_text %}{% endblock %}</h1>
                 <form method="POST" action="{% block form_action %}{% endblock %}">
                     {% csrf_token %}
-                    <input name="item_text" id="id_new_item" type="text" class="form-control"
-                           placeholder="작업 아이템 입력"/>
+                    {{ form.text }}
                     {% if error %}
                         <div class="has-error">{{ error }}</div>
                     {% endif %}
