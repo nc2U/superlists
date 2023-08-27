@@ -16,6 +16,9 @@ class FunctionalTest(StaticLiveServerTestCase):
         super().setUpClass()
         cls.server_url = cls.live_server_url
 
+    # server test console command
+    # liveserver=DOMAIN(or)IP python manage.py test functional_tests --debug-mode
+
     @classmethod
     def tearDownClass(cls) -> None:
         for arg in sys.argv:
