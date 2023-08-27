@@ -1,10 +1,11 @@
 from unittest import TestCase
 
 from lists.forms import ItemForm, EMPTY_LIST_ERROR
+from lists.models import List, Item
 
 
 class ItemFormTest(TestCase):
-    
+
     def test_form_item_input_has_placeholder_and_css_classes(self):
         form = ItemForm()
         self.assertIn('placeholder="작업 아이템 입력"', form.as_p())
@@ -14,3 +15,11 @@ class ItemFormTest(TestCase):
         form = ItemForm(data={'text': ''})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['text'], [EMPTY_LIST_ERROR])
+
+    def test_form_save_handles_saving_to_a_list(self):
+        list_ = List.objects.create()
+        form = ItemForm(data={'text': 'do me'})
+        add_item = form.save(for_list=list_)
+        self.assertEqual(add_item, Item.objects.first())
+        self.assertEqual(add_item.text, 'do me')
+        self.assertEqual(add_item.list, list_)
