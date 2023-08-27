@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from functional_tests.base import FunctionalTest
+from lists.forms import DUPLICATE_ITEM_ERROR
 
 
 class ItemValidationTest(FunctionalTest):
@@ -44,4 +45,4 @@ class ItemValidationTest(FunctionalTest):
         # 도움이 되는 에러 메시지를 본다
         self.check_for_row_in_list_table('1: 콜라 사기')
         error = self.browser.find_element(By.CSS_SELECTOR, '.has-error')
-        self.assertEqual(error.text, '이미 등록한 작어빕니다.')
+        self.assertEqual(error.text, DUPLICATE_ITEM_ERROR)

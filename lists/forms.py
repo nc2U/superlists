@@ -22,7 +22,8 @@ class ItemForm(forms.models.ModelForm):
         }
 
     def save(self, commit=False, **kwargs):
-        self.instance.list = kwargs['for_list']
+        if kwargs.get('for_list'):
+            self.instance.list = kwargs['for_list']
         return super().save()
 
 
