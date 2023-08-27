@@ -22,7 +22,7 @@ def view_list(request, list_id):
                   {'list': list_, 'form': form})
 
 
-def new_list(request):
+def add_list(request):
     form = ItemForm(data=request.POST)
     if form.is_valid():
         list_ = List.objects.create()

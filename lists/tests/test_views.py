@@ -67,7 +67,7 @@ class ListViewTest(TestCase):
             data={'text': '기존 목록에 신규 아이템'}
         )
         self.assertRedirects(response, '/lists/%d/' % correct_list.id)
- 
+
     def test_displays_item_form(self):
         list_ = List.objects.create()
         response = self.client.get('/lists/%d/' % list_.id)
@@ -103,7 +103,7 @@ class NewListTest(TestCase):
 
     def test_saving_a_POST_request(self):
         self.client.post(
-            '/lists/new',
+            '/lists/add',
             data={'text': '신규 작업 아이템'})
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
@@ -111,7 +111,7 @@ class NewListTest(TestCase):
 
     def test_redirects_after_POST(self):
         response = self.client.post(
-            '/lists/new',
+            '/lists/add',
             data={'text': '신규 작업 아이템'})
         new_list = List.objects.first()
         self.assertRedirects(
@@ -119,19 +119,19 @@ class NewListTest(TestCase):
             '/lists/%d/' % new_list.id)
 
     def test_for_invalid_input_renders_home_template(self):
-        response = self.client.post('/lists/new', data={'text': ''})
+        response = self.client.post('/lists/add', data={'text': ''})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
 
     def test_validation_errors_are_shown_on_home_page(self):
-        response = self.client.post('/lists/new', data={'text': ''})
+        response = self.client.post('/lists/add', data={'text': ''})
         self.assertContains(response, escape(EMPTY_LIST_ERROR))
 
     def test_for_invalid_input_passes_form_to_template(self):
-        response = self.client.post('/lists/new', data={'text': ''})
+        response = self.client.post('/lists/add', data={'text': ''})
         self.assertIsInstance(response.context['form'], ItemForm)
 
     def test_invalid_list_items_arent_saved(self):
-        self.client.post('/lists/new', data={'text': ''})
+        self.client.post('/lists/add', data={'text': ''})
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
