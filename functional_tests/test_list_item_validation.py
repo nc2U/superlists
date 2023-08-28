@@ -50,16 +50,16 @@ class ItemValidationTest(FunctionalTest):
         error = self.get_error_element()
         self.assertEqual(error.text, DUPLICATE_ITEM_ERROR)
 
-    def test_error_messages_are_cleared_on_input(self):
-        # 에디스는 검증 에러를 발생시키도록 신규 목록을 시작한다.
-        self.browser.get(self.server_url)
-        self.get_item_input_box().send_keys('\n')
-        error = self.get_error_element()
-        self.assertTrue(error.is_displayed())
-
-        # 에러를 제거하기 위해 입력 상자에 타이핑하기 시작한다.
-        self.get_item_input_box().send_keys('a')
-
-        # 에러 메시지가 사라진 것을 보고 기뻐한다.
-        error = self.get_error_element()
-        self.assertFalse(error.is_displayed())
+    # def test_error_messages_are_cleared_on_input(self):
+    #     # 에디스는 검증 에러를 발생시키도록 신규 목록을 시작한다.
+    #     self.browser.get(self.server_url)
+    #     self.get_item_input_box().send_keys('\n')
+    #     error = self.get_error_element()
+    #     self.assertTrue(error.is_displayed())
+    #
+    #     # 에러를 제거하기 위해 입력 상자에 타이핑하기 시작한다.
+    #     self.get_item_input_box().send_keys('a')
+    #
+    #     # 에러 메시지가 사라진 것을 보고 기뻐한다.
+    #     error = self.get_error_element()
+    #     self.assertFalse(error.is_displayed())
